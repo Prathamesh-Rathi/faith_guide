@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Create Account — FaithGuide{% endblock %}
+{% block content %}
+<div class="auth-bg">
+  <div class="auth-card">
+    <div class="text-center mb-4">
+      <i class="bi bi-brightness-high cross-icon"></i>
+      <div class="brand mt-1">FaithGuide</div>
+      <div style="color:#7a6a52;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase">
+        Begin your journey
+      </div>
+    </div>
+
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label">Full name</label>
+        <div class="input-group">
+          <span class="input-group-text" style="background:#1a1410;border-color:#3d3426;color:#7a6a52">
+            <i class="bi bi-person"></i>
+          </span>
+          <input type="text" name="name" class="form-control"
+                 placeholder="Your name" required autofocus/>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email address</label>
+        <div class="input-group">
+          <span class="input-group-text" style="background:#1a1410;border-color:#3d3426;color:#7a6a52">
+            <i class="bi bi-envelope"></i>
+          </span>
+          <input type="email" name="email" class="form-control"
+                 placeholder="you@example.com" required/>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <div class="input-group">
+          <span class="input-group-text" style="background:#1a1410;border-color:#3d3426;color:#7a6a52">
+            <i class="bi bi-lock"></i>
+          </span>
+          <input type="password" name="password" class="form-control"
+                 placeholder="Min 6 characters" required/>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="form-label">Your denomination</label>
+        <select name="denomination" class="form-select">
+          {% for d in denominations %}
+            <option value="{{ d }}">{{ d }}</option>
+          {% endfor %}
+        </select>
+        <div style="color:#5a4e3a;font-size:0.75rem;margin-top:4px">
+          This helps FaithGuide tailor responses to your tradition
+        </div>
+      </div>
+      <button type="submit" class="btn btn-gold w-100 py-2">
+        <i class="bi bi-person-plus me-1"></i> Create Account
+      </button>
+    </form>
+
+    <hr style="border-color:#3d3426;margin:24px 0"/>
+    <p class="text-center mb-0" style="color:#7a6a52;font-size:0.85rem">
+      Already have an account?
+      <a href="{{ url_for('auth.login') }}"
+         style="color:var(--gold);text-decoration:none;font-weight:600">
+        Sign in
+      </a>
+    </p>
+  </div>
+</div>
+{% endblock %}

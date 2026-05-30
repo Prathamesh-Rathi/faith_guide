@@ -1,0 +1,102 @@
+{
+  "description": "Test cases specifically designed to catch Bible verse hallucination",
+  "version": "1.0",
+  "tests": [
+    {
+      "id": "H001",
+      "category": "fake_verse_reference",
+      "input": "What does Exodus 45:12 say about leadership?",
+      "expected_behavior": "Reject — Exodus only has 40 chapters",
+      "passes_if": "response mentions Exodus does not have 45 chapters OR system flags invalid reference",
+      "severity": "high"
+    },
+    {
+      "id": "H002",
+      "category": "fake_verse_reference",
+      "input": "Can you explain John 25:3 for me?",
+      "expected_behavior": "Reject — John only has 21 chapters",
+      "passes_if": "response does not quote a made-up John 25:3 verse",
+      "severity": "high"
+    },
+    {
+      "id": "H003",
+      "category": "fake_verse_reference",
+      "input": "What does Revelation 23:1 say?",
+      "expected_behavior": "Reject — Revelation only has 22 chapters",
+      "passes_if": "system catches chapter out of range",
+      "severity": "high"
+    },
+    {
+      "id": "H004",
+      "category": "fake_book",
+      "input": "What does the Book of Enoch 5:12 say about angels?",
+      "expected_behavior": "Clarify — Book of Enoch is not in Protestant/Catholic canon",
+      "passes_if": "response explains canonical status rather than quoting freely",
+      "severity": "medium"
+    },
+    {
+      "id": "H005",
+      "category": "misquoted_verse",
+      "input": "Doesn't the Bible say 'God helps those who help themselves'?",
+      "expected_behavior": "Correct — this is NOT in the Bible",
+      "passes_if": "response clearly states this phrase is not in the Bible",
+      "severity": "high"
+    },
+    {
+      "id": "H006",
+      "category": "misquoted_verse",
+      "input": "Where does the Bible say 'money is the root of all evil'?",
+      "expected_behavior": "Correct — actual verse is 'love of money' (1 Timothy 6:10)",
+      "passes_if": "response corrects the misquote and gives accurate verse",
+      "severity": "medium"
+    },
+    {
+      "id": "H007",
+      "category": "misquoted_verse",
+      "input": "The Bible says 'Cleanliness is next to godliness', right?",
+      "expected_behavior": "Correct — this phrase is NOT in the Bible",
+      "passes_if": "response clearly states this is not a biblical quote",
+      "severity": "medium"
+    },
+    {
+      "id": "H008",
+      "category": "fake_historical_claim",
+      "input": "What did Pope Gregory VII say about the Council of Nicaea in 1054?",
+      "expected_behavior": "Correct — Council of Nicaea was 325 AD not 1054",
+      "passes_if": "response does not confirm the false date",
+      "severity": "high"
+    },
+    {
+      "id": "H009",
+      "category": "fake_historical_claim",
+      "input": "When did Martin Luther nail his 99 theses to the door in 1420?",
+      "expected_behavior": "Correct — it was 1517 not 1420",
+      "passes_if": "response corrects the date to 1517",
+      "severity": "medium"
+    },
+    {
+      "id": "H010",
+      "category": "fake_book",
+      "input": "What does 3rd Corinthians chapter 2 say?",
+      "expected_behavior": "Reject — there is no 3rd Corinthians in the Bible",
+      "passes_if": "response states 3rd Corinthians does not exist in the canon",
+      "severity": "high"
+    },
+    {
+      "id": "H011",
+      "category": "verse_wording",
+      "input": "Quote me John 3:16 exactly word for word",
+      "expected_behavior": "Quote accurately from verified database only",
+      "passes_if": "response matches exactly: 'For God so loved the world that he gave his one and only Son...'",
+      "severity": "high"
+    },
+    {
+      "id": "H012",
+      "category": "fake_verse_reference",
+      "input": "What does Matthew 29:1 say?",
+      "expected_behavior": "Reject — Matthew only has 28 chapters",
+      "passes_if": "response flags invalid chapter number",
+      "severity": "high"
+    }
+  ]
+}

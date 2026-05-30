@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}{{ content_type | title }} — FaithGuide{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h4 class="fw-700 mb-0">
+      {{ content_type.replace('_',' ').title() }}: {{ topic }}
+    </h4>
+    <span class="text-muted" style="font-size:0.82rem">
+      <i class="bi bi-church me-1"></i>{{ session.denomination }}
+    </span>
+  </div>
+  <a href="{{ url_for('chat.content_page') }}" class="btn btn-outline-gold btn-sm">
+    <i class="bi bi-arrow-left me-1"></i> Generate Another
+  </a>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="faith-card p-4">
+      <div style="font-size:0.9rem;line-height:1.9;
+                  color:#2d2416;white-space:pre-wrap">
+        {{ result.content }}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <!-- Verses used -->
+    {% if result.verses_used %}
+    <div class="faith-card p-4 mb-3">
+      <h6 class="fw-600 mb-3" style="color:var(--gold-dark)">
+        <i class="bi bi-book me-2"></i>Scripture used
+      </h6>
+      {% for v in result.verses_used %}
+      <div class="verse-badge">
+        <div class="ref">{{ v.reference }}</div>
+        {{ v.text }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Actions -->
+    <div class="faith-card p-4">
+      <h6 class="fw-600 mb-3" style="color:var(--gold-dark)">Actions</h6>
+      <div class="d-flex flex-column gap-2">
+        <button class="btn btn-gold btn-sm"
+                onclick="navigator.clipboard.writeText(
+                  document.querySelector('.faith-card div[style]').innerText
+                ).then(()=>alert('Copied to clipboard!'))">
+          <i class="bi bi-clipboard me-1"></i> Copy Content
+        </button>
+        <a href="{{ url_for('chat.content_page') }}" class="btn btn-outline-gold btn-sm">
+          <i class="bi bi-plus-lg me-1"></i> Generate Another
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
